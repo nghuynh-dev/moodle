@@ -9,6 +9,17 @@ Feature: Add badges to the system
     And I log in as "admin"
 
   @javascript
+  Scenario: Setting badges settings
+    Given I navigate to "Badges > Badges settings" in site administration
+    And I set the field "Badge issuer name" to "Test Badge Site"
+    And I set the field "Badge issuer email address" to "testuser@example.com"
+    And I press "Save changes"
+    And I navigate to "Badges > Add a new badge" in site administration
+    And I expand all fieldsets
+    Then the field with xpath "//input[@name='issuercontact']" matches value "testuser@example.com"
+    And the field with xpath "//input[@name='issuername']" matches value "Test Badge Site"
+
+  @javascript
   Scenario: Accessing the badges
     And I turn editing mode on
     And the following config values are set as admin:
